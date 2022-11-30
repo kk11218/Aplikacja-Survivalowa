@@ -31,9 +31,5 @@
         <item name="textOutlineColor">#000000</item>
 
     </style>
-    <!-- imagine background if light mode on -->
-    <style name="IMAGINE">
-        <item name="android:background">#00EFF2F3</item>
-        <item name="textOutlineColor">#B30808</item>
-    </style>
+
 </resources>

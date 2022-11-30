@@ -36,7 +36,6 @@
         android:id="@+id/imageView"
         android:layout_width="278dp"
         android:layout_height="271dp"
-        style="@style/IMAGINE"
         app:layout_constraintBottom_toTopOf="@+id/imageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
