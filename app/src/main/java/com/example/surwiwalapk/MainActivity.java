@@ -1,8 +1,10 @@
 package com.example.surwiwalapk;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -17,14 +19,20 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private ImageButton toggleButton;
 
-    boolean hasCameraFlash = false;
-    boolean flashOn = false;
+    Switch switcher;
+    boolean nightMODE;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    boolean hasCameraFlash = false;//latarka
+    boolean flashOn = false;//latarka
 
     private TextView textView;// kompass
 
@@ -48,7 +56,38 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);// kompass
+//---------------------------------------------------------------------------------------------------
+        getSupportActionBar().hide();
 
+        switcher = findViewById(R.id.switcher);
+
+        sharedPreferences = getSharedPreferences("MODE",Context.MODE_PRIVATE);
+        nightMODE = sharedPreferences.getBoolean("night", false);
+
+        if(nightMODE){
+            switcher.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+switcher.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if(nightMODE){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", false);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", true);
+        }
+        editor.apply();
+
+    }
+});
+
+
+//---------------------------------------------------------------------------------------------------
         textView = findViewById(R.id.textView);// kompass
 
         imageView = findViewById(R.id.imageView);// kompass
@@ -57,57 +96,60 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// kompass
         magnetometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);// kompass
 
+//---------------------------------------------------------------------------------------------------
+        toggleButton = findViewById(R.id.imageButton);//latarka
 
-        toggleButton = findViewById(R.id.imageButton);
+        hasCameraFlash = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);//latarka
 
-        hasCameraFlash = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-
-        toggleButton.setOnClickListener(new View.OnClickListener() {
+        toggleButton.setOnClickListener(new View.OnClickListener() {//latarka
             @Override
             public void onClick(View view) {
-              if (hasCameraFlash){
-                  if (flashOn){
-                      flashOn = false;
-                      toggleButton.setImageResource(R.drawable.off);
+
+
+
+              if (hasCameraFlash){//latarka
+                  if (flashOn){//latarka
+                      flashOn = false;//latarka
+                      toggleButton.setImageResource(R.drawable.off);//latarka
                       try {
-                          flashLightOff();
-                      } catch (CameraAccessException e) {
-                          e.printStackTrace();
+                          flashLightOff();//latarka
+                      } catch (CameraAccessException e) {//latarka
+                          e.printStackTrace();//latarka
                       }
                   }
-                  else{
-                      flashOn = true;
-                      toggleButton.setImageResource(R.drawable.on);
-                      try {
-                          flashLightOn();
-                      } catch (CameraAccessException e) {
-                          e.printStackTrace();
+                  else{//latarka
+                      flashOn = true;//latarka
+                      toggleButton.setImageResource(R.drawable.on);//latarka
+                      try {//latarka
+                          flashLightOn();//latarka
+                      } catch (CameraAccessException e) {//latarka
+                          e.printStackTrace();//latarka
                       }
                   }
               }
-              else{
-                  Toast.makeText(MainActivity.this, "No flash available on your device", Toast.LENGTH_LONG).show();
+              else{//latarka
+                  Toast.makeText(MainActivity.this, "No flash available on your device", Toast.LENGTH_LONG).show();//latarka
               }
             }
         });
     }
 
-    private void flashLightOn() throws CameraAccessException {
-        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        assert cameraManager != null;
-        String cameraId = cameraManager.getCameraIdList()[0];
-        cameraManager.setTorchMode(cameraId, true);
-        Toast.makeText(MainActivity.this, "FlashLight is ON", Toast.LENGTH_SHORT).show();
+    private void flashLightOn() throws CameraAccessException {//latarka
+        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);//latarka
+        assert cameraManager != null;//latarka
+        String cameraId = cameraManager.getCameraIdList()[0];//latarka
+        cameraManager.setTorchMode(cameraId, true);//latarka
+        Toast.makeText(MainActivity.this, "FlashLight is ON", Toast.LENGTH_SHORT).show();//latarka
     }
 
-    private void flashLightOff() throws CameraAccessException {
-        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        assert cameraManager != null;
-        String cameraId = cameraManager.getCameraIdList()[0];
-        cameraManager.setTorchMode(cameraId, false);
-        Toast.makeText(MainActivity.this, "FlashLight is OFF", Toast.LENGTH_SHORT).show();
+    private void flashLightOff() throws CameraAccessException {//latarka
+        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);//latarka
+        assert cameraManager != null;//latarka
+        String cameraId = cameraManager.getCameraIdList()[0];//latarka
+        cameraManager.setTorchMode(cameraId, false);//latarka
+        Toast.makeText(MainActivity.this, "FlashLight is OFF", Toast.LENGTH_SHORT).show();//latarka
     }
-
+    //---------------------------------------------------------------------------------------------------
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
