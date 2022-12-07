@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -24,12 +25,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    private ImageButton toggleButton;
+    private ImageButton toggleButton;//latarka
+    private ImageButton toggleButton2;//nowa strona tajmer
 
-    Switch switcher;
-    boolean nightMODE;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    Switch switcher;//tryb ciemny
+    boolean nightMODE;//tryb ciemny
+    SharedPreferences sharedPreferences;//tryb ciemny
+    SharedPreferences.Editor editor;//tryb ciemny
 
     boolean hasCameraFlash = false;//latarka
     boolean flashOn = false;//latarka
@@ -55,33 +57,42 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //---------------------------------------------------------------------------------------------------
+    toggleButton2 = findViewById(R.id.imageButton2);//nowa strona tajmer
+    toggleButton2.setOnClickListener(new View.OnClickListener() {//nowa strona tajmer
+        @Override//nowa strona tajmer
+        public void onClick(View view) {//nowa strona tajmer
+            openTajmer();//nowa strona tajmer
+        }
+    });
+        //---------------------------------------------------------------------------------------------------
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);// kompass
 //---------------------------------------------------------------------------------------------------
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();//tryb ciemny
 
-        switcher = findViewById(R.id.switcher);
+        switcher = findViewById(R.id.switcher);//tryb ciemny
 
-        sharedPreferences = getSharedPreferences("MODE",Context.MODE_PRIVATE);
-        nightMODE = sharedPreferences.getBoolean("night", false);
+        sharedPreferences = getSharedPreferences("MODE",Context.MODE_PRIVATE);//tryb ciemny
+        nightMODE = sharedPreferences.getBoolean("night", false);//tryb ciemny
 
-        if(nightMODE){
-            switcher.setChecked(true);
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        if(nightMODE){//tryb ciemny
+            switcher.setChecked(true);//tryb ciemny
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);//tryb ciemny
         }
 
-switcher.setOnClickListener(new View.OnClickListener() {
+switcher.setOnClickListener(new View.OnClickListener() {//tryb ciemny
     @Override
-    public void onClick(View view) {
-        if(nightMODE){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            editor = sharedPreferences.edit();
-            editor.putBoolean("night", false);
+    public void onClick(View view) {//tryb ciemny
+        if(nightMODE){//tryb ciemny
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//tryb ciemny
+            editor = sharedPreferences.edit();//tryb ciemny
+            editor.putBoolean("night", false);//tryb ciemny
         }else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            editor = sharedPreferences.edit();
-            editor.putBoolean("night", true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);//tryb ciemny
+            editor = sharedPreferences.edit();//tryb ciemny
+            editor.putBoolean("night", true);//tryb ciemny
         }
-        editor.apply();
+        editor.apply();//tryb ciemny
 
     }
 });
@@ -132,6 +143,12 @@ switcher.setOnClickListener(new View.OnClickListener() {
               }
             }
         });
+    }
+    //---------------------------------------------------------------------------------------------------
+    public void openTajmer()
+    {
+        Intent intent = new Intent(this, Tajmer.class);//nowa strona tajmer
+        startActivity(intent);//nowa strona tajmer
     }
 
     private void flashLightOn() throws CameraAccessException {//latarka
