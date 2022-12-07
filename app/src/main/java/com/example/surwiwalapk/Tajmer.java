@@ -84,6 +84,7 @@ public class Tajmer extends AppCompatActivity {
         mStartTimeInMillis = milliseconds;
         resetTimer();
         closeKeyboard();
+
     }
 
     private void startTimer() {

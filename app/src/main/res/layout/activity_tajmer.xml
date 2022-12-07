@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    style="@style/SCREEN"
     android:layout_height="match_parent"
     tools:context=".Tajmer">
 
@@ -19,17 +20,17 @@
         android:maxLength="4"
         app:layout_constraintBottom_toTopOf="@+id/text_view_countdown"
         app:layout_constraintEnd_toStartOf="@+id/button_set"
-        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintVertical_bias="0.839" />
 
     <Button
         android:id="@+id/button_set"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/edit_text_input"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="20dp"
         android:layout_toEndOf="@+id/edit_text_input"
         android:text="Zastosuj"
         app:layout_constraintBaseline_toBaselineOf="@+id/edit_text_input"
