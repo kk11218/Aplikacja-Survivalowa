@@ -7,20 +7,29 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 
 import java.util.Locale;
 
 public class Tajmer extends AppCompatActivity {
 
-    Button timeButton;
+    
+
+    private Button timeButton;
     int hour, minute;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tajmer);
         timeButton = findViewById(R.id.timeButton);
+
+
+
+
+
 
 
     }
