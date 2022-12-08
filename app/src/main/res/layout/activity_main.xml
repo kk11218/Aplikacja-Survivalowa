@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.854"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/off" />
+        app:srcCompat="@drawable/off1" />
 
     <ImageView
         android:id="@+id/imageView"
