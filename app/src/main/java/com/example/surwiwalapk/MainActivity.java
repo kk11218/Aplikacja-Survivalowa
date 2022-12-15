@@ -121,7 +121,7 @@ switcher.setOnClickListener(new View.OnClickListener() {//tryb ciemny
               if (hasCameraFlash){//latarka
                   if (flashOn){//latarka
                       flashOn = false;//latarka
-                      toggleButton.setImageResource(R.drawable.off);//latarka
+                      toggleButton.setImageResource(R.drawable.off1);//latarka
                       try {
                           flashLightOff();//latarka
                       } catch (CameraAccessException e) {//latarka
@@ -130,7 +130,7 @@ switcher.setOnClickListener(new View.OnClickListener() {//tryb ciemny
                   }
                   else{//latarka
                       flashOn = true;//latarka
-                      toggleButton.setImageResource(R.drawable.on);//latarka
+                      toggleButton.setImageResource(R.drawable.on1);//latarka
                       try {//latarka
                           flashLightOn();//latarka
                       } catch (CameraAccessException e) {//latarka
