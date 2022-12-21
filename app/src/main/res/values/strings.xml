@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Surwiwal APK</string>
+    <string name="title_activity_map">Map</string>
+    <string name="googleApi">AIzaSyDE4DAitDKmTlh5bl9TEio57kQwSvZZxOM</string>
 </resources>
