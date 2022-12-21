@@ -27,15 +27,16 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private ImageButton toggleButton;//latarka
     private ImageButton toggleButton2;//nowa strona tajmer
+    private ImageButton toggleButtom3;//nowa strona Mapa
 
     Switch switcher;//tryb ciemny
     boolean nightMODE;//tryb ciemny
     SharedPreferences sharedPreferences;//tryb ciemny
     SharedPreferences.Editor editor;//tryb ciemny
-
+    //---------------------------------------------------------------------------------------------------
     boolean hasCameraFlash = false;//latarka
     boolean flashOn = false;//latarka
-
+    //---------------------------------------------------------------------------------------------------
     private TextView textView;// kompass
 
     private ImageView imageView;// kompass
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //---------------------------------------------------------------------------------------------------
+        toggleButtom3 = findViewById(R.id.BMap);//nowa strona Mapa
+        toggleButtom3.setOnClickListener(new View.OnClickListener() {//nowa strona Mapa
+            @Override
+            public void onClick(View view) {//nowa strona Mapa
+                openMap();
+            }
+        });
+
+                //---------------------------------------------------------------------------------------------------
     toggleButton2 = findViewById(R.id.imageButton2);//nowa strona tajmer
     toggleButton2.setOnClickListener(new View.OnClickListener() {//nowa strona tajmer
         @Override//nowa strona tajmer
@@ -143,6 +153,11 @@ switcher.setOnClickListener(new View.OnClickListener() {//tryb ciemny
               }
             }
         });
+    }
+    //---------------------------------------------------------------------------------------------------
+    public void openMap(){
+        Intent intent = new Intent(this,Map.class);//nowa strona Mapa
+        startActivity(intent);//nowa strona Mapa
     }
     //---------------------------------------------------------------------------------------------------
     public void openTajmer()
